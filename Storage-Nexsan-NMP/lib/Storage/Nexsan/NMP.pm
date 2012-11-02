@@ -2,7 +2,7 @@ package Storage::Nexsan::NMP;
 
 use strict;
 use warnings;
-use v5.12.2; #make use of the say command and other nifty perl 10.0 onwards goodness
+use v5.10; #make use of the say command and other nifty perl 10.0 onwards goodness
 use Carp;
 use IO::Socket::INET;
 use IO::File;
@@ -24,14 +24,13 @@ use Exporter;
 
 Storage::Nexsan::NMP - The great new way to mange Nexsan's programattically!
 
-
 =head1 VERSION
 
 Version 0.03
 
 =cut
 
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 
 
 =head1 SYNOPSIS
@@ -45,14 +44,16 @@ otherwise noted.
 This module covers only the following functions:
 	
 	Status
+	System Information
 	Firmware upgrade
 	Shutdown
 	Rolling Reboot of controllers
 	Event Log count
 	Turning off MAID
-	TBC - importing DAT files
+	Setting options via SETOPT/DAT files
 	
-Further work will be done to implement the rest of the NMP in due course.
+Further work will be done to implement the rest of the NMP as I require it, 
+ unless anyone wants to pitch in and help...
 
 
 Sample code snippet.
@@ -95,6 +96,17 @@ UploadFirmwareToNexsan(\%NexsanInfo);
 
 close($sock);
 
+=head1 TODO
+
+ * Rewrite the functions as OO - at the moment each function copies and pastes some standard functionality
+    which is nasty and should be fixed, but out of TUITS..
+ * apply some error checking for correct INI structure in SetOpt()
+ * write a specific subroutine for the Powerlevel stanza (see notes in TurnOffMAIDInNexsan() )
+ * write tests that tries functions not passing a $nexsan veriable
+ * write tests that tries functions not passing a $port variable
+ * write a test suite
+ * write a Nexsan emulator that returns canned responses for the above test suite (definately in wish list territory here)
+
 
 =head1 EXPORT
 
@@ -130,10 +142,10 @@ $VAR7 = 'sock';
 
 =cut
 
-=head2 Log
+=head2 WriteLog
 
-internal function that takes the %NexsanInfo hash, and prepends nexan name/ip and 
-date/time to the ususal 'say' output.
+internal (i.e. not exported) function that takes the %NexsanInfo hash, 
+and prepends nexan name/ip and date/time to the ususal 'say' output.
 
 it assumes that ConnectToNexsan has been run, but nothing else.
 
@@ -928,12 +940,12 @@ sub SetOpt {
 	
 } #end of sub SetOpt	
 	
-=head2 function2
-
-=cut
-
-sub function2 {
-}
+#=head2 function2
+#
+#=cut
+#
+#sub function2 {
+#}
 
 =head1 AUTHOR
 
@@ -979,6 +991,9 @@ L<http://search.cpan.org/dist/Storage-Nexsan-NMP/>
 
 
 =head1 ACKNOWLEDGEMENTS
+
+James Peck at Nexsan dot com for helping approve the release of this and answering inumerable questions
+Carl Elkins at sanger dot ac dot uk for allowing me the time to write this
 
 
 =head1 LICENSE AND COPYRIGHT
