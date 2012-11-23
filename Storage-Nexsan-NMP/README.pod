@@ -2,10 +2,9 @@
 
 Storage::Nexsan::NMP - The great new way to mange Nexsan's programattically!
 
-
 =head1 VERSION
 
-Version 0.01
+Version 0.05
 
 
 =cut
@@ -21,16 +20,21 @@ otherwise noted.
 This module covers only the following functions:
 	
 	Status
+	System Information
 	Firmware upgrade
 	Shutdown
 	Rolling Reboot of controllers
+	Event Log count
+	Turning off MAID
+	Setting options via SETOPT/DAT files
 	
-Further work will be done to implement the rest of the NMP in due course.
+Further work will be done to implement the rest of the NMP as I require it, 
+ unless anyone wants to pitch in and help...
 
 
 Sample code snippet.
 
-    use Storage::Nexsan::NMP;
+use Storage::Nexsan::NMP;
 
 say "Connecting to Nexsan: $nexsan, Port: $port";           
 my %NexsanInfo = ConnectToNexsan ($nexsan, $port);
@@ -68,6 +72,16 @@ UploadFirmwareToNexsan(\%NexsanInfo);
 
 close($sock);
 
+=head1 TODO
+
+ * Rewrite the functions as OO - at the moment each function copies and pastes some standard functionality which is nasty and should be fixed, but out of TUITS..
+ * apply some error checking for correct INI structure in SetOpt()
+ * write a specific subroutine for the Powerlevel stanza (see notes in TurnOffMAIDInNexsan() )
+ * write tests that tries functions not passing a $nexsan veriable
+ * write tests that tries functions not passing a $port variable
+ * write a test suite
+ * write a Nexsan emulator that returns canned responses for the above test suite (definately in wish list territory here)
+
 
 =head1 EXPORT
 
@@ -104,12 +118,19 @@ $VAR7 = 'sock';
 
 =cut
 
-=head2 Log
+=head2 WriteLog
 
-internal function that takes the %NexsanInfo hash, and prepends nexan name/ip and 
-date/time to the ususal 'say' output.
+internal (i.e. not exported) function that takes the %NexsanInfo hash, 
+and prepends nexan name/ip and date/time to the ususal 'say' output.
 
 it assumes that ConnectToNexsan has been run, but nothing else.
+
+
+=cut
+
+=head2 ConnectToNexsan
+
+Initial setup internal function used by all the utility functions to setup the telnet conenction
 
 
 =cut
@@ -218,7 +239,53 @@ To quote the NMP Reference Manual (v.2.3.0);
 
 =cut
 
-=head2 function2
+=head2 importDatFile
+
+Import an .ini file (called .dat by Nexsan) that provides many confuguration options.
+The idea is that it can be used by another function to then upload a atandard config, 
+replicating the behaviour of the GUI.
+
+Requires a filename scalar passed to it, and returns a hash reference, for e.g.;
+
+$HASH1 = {
+           ActiveActive
+                    => { ActiveActiveMode => 'APAL' },
+           Cache    => {
+                         AllowSCSIOverride
+                                       => 'Disabled',
+                         Cache         => 'Enabled',
+                         CacheTuning   => 'Mixed',
+                         IgnoreForceUnitAccess
+                                       => 'Enabled',
+                         Mirroring     => 'Enabled',
+                         ReadStreamMode
+                                       => 'Disabled',
+                         StreamingMode => 'Disabled'
+                       },
+           SYSLOG   => {
+                         Facility   => 'LOCAL0',
+                         SendToIP   => '172.17.9.9',
+                         UDPPort    => 514,
+                         WhenToSend => 'All'
+                       }
+         };
+
+
+=cut
+
+=head2 SetOpt
+
+using the importDatFile internal function, apply a number of Nexsan Dat file stanza's.
+
+The sub expects $NexsanInfo->{datfile} populated with the name of the dat file to import.
+
+Note: no error checking is done on the hash to see it contains a correct INI structure
+ as it assumes that its been imported from an Nexsan created/modified DAT file.
+ Given the SETOPT command if not passed the write information, this is relatively low risk
+ 
+ TODO apply some error checking for correct INI structure, as above!
+ TODO write a specific subroutine for the Powerlevel stanza 
+ 	(see notes in TurnOffMAIDInNexsan)
 
 
 =cut
@@ -267,6 +334,9 @@ L<http://search.cpan.org/dist/Storage-Nexsan-NMP/>
 
 
 =head1 ACKNOWLEDGEMENTS
+
+James Peck at Nexsan dot com for helping approve the release of this and answering inumerable questions
+Carl Elkins at sanger dot ac dot uk for allowing me the time to write this
 
 
 =head1 LICENSE AND COPYRIGHT

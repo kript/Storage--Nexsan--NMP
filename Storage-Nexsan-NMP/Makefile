@@ -27,28 +27,28 @@
 
 # --- MakeMaker const_config section:
 
-# These definitions are from config.sh (via /software/perl-5.8.8/lib/5.8.8/i686-linux-thread-multi/Config.pm).
+# These definitions are from config.sh (via /Users/jc18/perl5/perlbrew/perls/perl-5.12.4/lib/5.12.4/darwin-2level/Config.pm).
 # They may have been overridden via Makefile.PL or on the command line.
 AR = ar
-CC = gcc-3.4
-CCCDLFLAGS = -fpic
-CCDLFLAGS = -Wl,-E -Wl,-rpath,/software/perl-5.8.8/lib/5.8.8/i686-linux-thread-multi/CORE
-DLEXT = so
+CC = cc
+CCCDLFLAGS =  
+CCDLFLAGS =  
+DLEXT = bundle
 DLSRC = dl_dlopen.xs
 EXE_EXT = 
 FULL_AR = /usr/bin/ar
-LD = gcc-3.4
-LDDLFLAGS = -shared -L/usr/local/lib
-LDFLAGS =  -L/usr/local/lib
-LIBC = /lib/libc-2.3.2.so
+LD = env MACOSX_DEPLOYMENT_TARGET=10.3 cc
+LDDLFLAGS =  -bundle -undefined dynamic_lookup -L/usr/local/lib -L/opt/local/lib -fstack-protector
+LDFLAGS =  -fstack-protector -L/usr/local/lib -L/opt/local/lib
+LIBC = /usr/lib/libc.dylib
 LIB_EXT = .a
 OBJ_EXT = .o
-OSNAME = linux
-OSVERS = 2.6.8lustre
-RANLIB = :
-SITELIBEXP = /software/perl-5.8.8/lib/site_perl/5.8.8
-SITEARCHEXP = /software/perl-5.8.8/lib/site_perl/5.8.8/i686-linux-thread-multi
-SO = so
+OSNAME = darwin
+OSVERS = 10.8.0
+RANLIB = ranlib
+SITELIBEXP = /Users/jc18/perl5/perlbrew/perls/perl-5.12.4/lib/site_perl/5.12.4
+SITEARCHEXP = /Users/jc18/perl5/perlbrew/perls/perl-5.12.4/lib/site_perl/5.12.4/darwin-2level
+SO = dylib
 VENDORARCHEXP = 
 VENDORLIBEXP = 
 
@@ -59,11 +59,11 @@ DIRFILESEP = /
 DFSEP = $(DIRFILESEP)
 NAME = Storage::Nexsan::NMP
 NAME_SYM = Storage_Nexsan_NMP
-VERSION = 0.02
+VERSION = 0.05
 VERSION_MACRO = VERSION
-VERSION_SYM = 0_02
+VERSION_SYM = 0_05
 DEFINE_VERSION = -D$(VERSION_MACRO)=\"$(VERSION)\"
-XS_VERSION = 0.02
+XS_VERSION = 0.05
 XS_VERSION_MACRO = XS_VERSION
 XS_DEFINE_VERSION = -D$(XS_VERSION_MACRO)=\"$(XS_VERSION)\"
 INST_ARCHLIB = blib/arch
@@ -77,55 +77,55 @@ MAN3EXT = 3
 INSTALLDIRS = site
 DESTDIR = 
 PREFIX = $(SITEPREFIX)
-PERLPREFIX = /software/perl-5.8.8
-SITEPREFIX = /software/perl-5.8.8
+PERLPREFIX = /Users/jc18/perl5/perlbrew/perls/perl-5.12.4
+SITEPREFIX = /Users/jc18/perl5/perlbrew/perls/perl-5.12.4
 VENDORPREFIX = 
-INSTALLPRIVLIB = /software/perl-5.8.8/lib/5.8.8
+INSTALLPRIVLIB = /Users/jc18/perl5/perlbrew/perls/perl-5.12.4/lib/5.12.4
 DESTINSTALLPRIVLIB = $(DESTDIR)$(INSTALLPRIVLIB)
-INSTALLSITELIB = /software/perl-5.8.8/lib/site_perl/5.8.8
+INSTALLSITELIB = /Users/jc18/perl5/perlbrew/perls/perl-5.12.4/lib/site_perl/5.12.4
 DESTINSTALLSITELIB = $(DESTDIR)$(INSTALLSITELIB)
 INSTALLVENDORLIB = 
 DESTINSTALLVENDORLIB = $(DESTDIR)$(INSTALLVENDORLIB)
-INSTALLARCHLIB = /software/perl-5.8.8/lib/5.8.8/i686-linux-thread-multi
+INSTALLARCHLIB = /Users/jc18/perl5/perlbrew/perls/perl-5.12.4/lib/5.12.4/darwin-2level
 DESTINSTALLARCHLIB = $(DESTDIR)$(INSTALLARCHLIB)
-INSTALLSITEARCH = /software/perl-5.8.8/lib/site_perl/5.8.8/i686-linux-thread-multi
+INSTALLSITEARCH = /Users/jc18/perl5/perlbrew/perls/perl-5.12.4/lib/site_perl/5.12.4/darwin-2level
 DESTINSTALLSITEARCH = $(DESTDIR)$(INSTALLSITEARCH)
 INSTALLVENDORARCH = 
 DESTINSTALLVENDORARCH = $(DESTDIR)$(INSTALLVENDORARCH)
-INSTALLBIN = /software/perl-5.8.8/bin
+INSTALLBIN = /Users/jc18/perl5/perlbrew/perls/perl-5.12.4/bin
 DESTINSTALLBIN = $(DESTDIR)$(INSTALLBIN)
-INSTALLSITEBIN = /software/perl-5.8.8/bin
+INSTALLSITEBIN = /Users/jc18/perl5/perlbrew/perls/perl-5.12.4/bin
 DESTINSTALLSITEBIN = $(DESTDIR)$(INSTALLSITEBIN)
 INSTALLVENDORBIN = 
 DESTINSTALLVENDORBIN = $(DESTDIR)$(INSTALLVENDORBIN)
-INSTALLSCRIPT = /software/perl-5.8.8/bin
+INSTALLSCRIPT = /Users/jc18/perl5/perlbrew/perls/perl-5.12.4/bin
 DESTINSTALLSCRIPT = $(DESTDIR)$(INSTALLSCRIPT)
-INSTALLSITESCRIPT = /software/perl-5.8.8/bin
+INSTALLSITESCRIPT = /Users/jc18/perl5/perlbrew/perls/perl-5.12.4/bin
 DESTINSTALLSITESCRIPT = $(DESTDIR)$(INSTALLSITESCRIPT)
 INSTALLVENDORSCRIPT = 
 DESTINSTALLVENDORSCRIPT = $(DESTDIR)$(INSTALLVENDORSCRIPT)
-INSTALLMAN1DIR = /software/perl-5.8.8/man/man1
+INSTALLMAN1DIR = /Users/jc18/perl5/perlbrew/perls/perl-5.12.4/man/man1
 DESTINSTALLMAN1DIR = $(DESTDIR)$(INSTALLMAN1DIR)
-INSTALLSITEMAN1DIR = /software/perl-5.8.8/man/man1
+INSTALLSITEMAN1DIR = /Users/jc18/perl5/perlbrew/perls/perl-5.12.4/man/man1
 DESTINSTALLSITEMAN1DIR = $(DESTDIR)$(INSTALLSITEMAN1DIR)
 INSTALLVENDORMAN1DIR = 
 DESTINSTALLVENDORMAN1DIR = $(DESTDIR)$(INSTALLVENDORMAN1DIR)
-INSTALLMAN3DIR = /software/perl-5.8.8/man/man3
+INSTALLMAN3DIR = /Users/jc18/perl5/perlbrew/perls/perl-5.12.4/man/man3
 DESTINSTALLMAN3DIR = $(DESTDIR)$(INSTALLMAN3DIR)
-INSTALLSITEMAN3DIR = /software/perl-5.8.8/man/man3
+INSTALLSITEMAN3DIR = /Users/jc18/perl5/perlbrew/perls/perl-5.12.4/man/man3
 DESTINSTALLSITEMAN3DIR = $(DESTDIR)$(INSTALLSITEMAN3DIR)
 INSTALLVENDORMAN3DIR = 
 DESTINSTALLVENDORMAN3DIR = $(DESTDIR)$(INSTALLVENDORMAN3DIR)
-PERL_LIB = /software/perl-5.8.8/lib/5.8.8
-PERL_ARCHLIB = /software/perl-5.8.8/lib/5.8.8/i686-linux-thread-multi
+PERL_LIB = /Users/jc18/perl5/perlbrew/perls/perl-5.12.4/lib/5.12.4
+PERL_ARCHLIB = /Users/jc18/perl5/perlbrew/perls/perl-5.12.4/lib/5.12.4/darwin-2level
 LIBPERL_A = libperl.a
 FIRST_MAKEFILE = Makefile
 MAKEFILE_OLD = Makefile.old
 MAKE_APERL_FILE = Makefile.aperl
 PERLMAINCC = $(CC)
-PERL_INC = /software/perl-5.8.8/lib/5.8.8/i686-linux-thread-multi/CORE
-PERL = /software/perl-5.8.8/bin/perl
-FULLPERL = /software/perl-5.8.8/bin/perl
+PERL_INC = /Users/jc18/perl5/perlbrew/perls/perl-5.12.4/lib/5.12.4/darwin-2level/CORE
+PERL = /Users/jc18/perl5/perlbrew/perls/perl-5.12.4/bin/perl
+FULLPERL = /Users/jc18/perl5/perlbrew/perls/perl-5.12.4/bin/perl
 ABSPERL = $(PERL)
 PERLRUN = $(PERL)
 FULLPERLRUN = $(FULLPERL)
@@ -138,7 +138,7 @@ PERM_DIR = 755
 PERM_RW = 644
 PERM_RWX = 755
 
-MAKEMAKER   = /software/perl-5.8.8/lib/5.8.8/ExtUtils/MakeMaker.pm
+MAKEMAKER   = /Users/jc18/perl5/perlbrew/perls/perl-5.12.4/lib/5.12.4/ExtUtils/MakeMaker.pm
 MM_VERSION  = 6.56
 MM_REVISION = 65600
 
@@ -163,7 +163,8 @@ C_FILES  =
 O_FILES  = 
 H_FILES  = 
 MAN1PODS = 
-MAN3PODS = lib/Storage/Nexsan/NMP.pm
+MAN3PODS = README.pod \
+	lib/Storage/Nexsan/NMP.pm
 
 # Where is the Config information that we are using/depend on
 CONFIGDEP = $(PERL_ARCHLIB)$(DFSEP)Config.pm $(PERL_INC)$(DFSEP)config.h
@@ -185,9 +186,12 @@ PERL_ARCHIVE       =
 PERL_ARCHIVE_AFTER = 
 
 
-TO_INST_PM = lib/Storage/Nexsan/NMP.pm
+TO_INST_PM = README.pod \
+	lib/Storage/Nexsan/NMP.pm
 
-PM_TO_BLIB = lib/Storage/Nexsan/NMP.pm \
+PM_TO_BLIB = README.pod \
+	$(INST_LIB)/Storage/Nexsan/README.pod \
+	lib/Storage/Nexsan/NMP.pm \
 	blib/lib/Storage/Nexsan/NMP.pm
 
 
@@ -242,7 +246,7 @@ makemakerdflt : all
 
 
 # --- MakeMaker dist section:
-TAR = tar
+TAR = COPY_EXTENDED_ATTRIBUTES_DISABLE=1 COPYFILE_DISABLE=1 tar
 TARFLAGS = cvf
 ZIP = zip
 ZIPFLAGS = -r
@@ -257,7 +261,7 @@ RCS_LABEL = rcs -Nv$(VERSION_SYM): -q
 DIST_CP = best
 DIST_DEFAULT = tardist
 DISTNAME = Storage-Nexsan-NMP
-DISTVNAME = Storage-Nexsan-NMP-0.02
+DISTVNAME = Storage-Nexsan-NMP-0.05
 
 
 # --- MakeMaker macro section:
@@ -410,8 +414,10 @@ POD2MAN = $(POD2MAN_EXE)
 
 
 manifypods : pure_all  \
+	README.pod \
 	lib/Storage/Nexsan/NMP.pm
 	$(NOECHO) $(POD2MAN) --section=3 --perm_rw=$(PERM_RW) \
+	  README.pod $(INST_MAN3DIR)/Storage::Nexsan::README.$(MAN3EXT) \
 	  lib/Storage/Nexsan/NMP.pm $(INST_MAN3DIR)/Storage::Nexsan::NMP.$(MAN3EXT) 
 
 
@@ -478,7 +484,7 @@ metafile : create_distdir
 	$(NOECHO) $(ECHO) Generating META.yml
 	$(NOECHO) $(ECHO) '--- #YAML:1.0' > META_new.yml
 	$(NOECHO) $(ECHO) 'name:               Storage-Nexsan-NMP' >> META_new.yml
-	$(NOECHO) $(ECHO) 'version:            0.02' >> META_new.yml
+	$(NOECHO) $(ECHO) 'version:            0.05' >> META_new.yml
 	$(NOECHO) $(ECHO) 'abstract:           The great new way to mange Nexsan'\''s programattically!' >> META_new.yml
 	$(NOECHO) $(ECHO) 'author:' >> META_new.yml
 	$(NOECHO) $(ECHO) '    - John Constable <john.constable@sanger.ac.uk>' >> META_new.yml
@@ -744,7 +750,7 @@ $(FIRST_MAKEFILE) : Makefile.PL $(CONFIGDEP)
 
 # --- MakeMaker makeaperl section ---
 MAP_TARGET    = perl
-FULLPERL      = /software/perl-5.8.8/bin/perl
+FULLPERL      = /Users/jc18/perl5/perlbrew/perls/perl-5.12.4/bin/perl
 
 $(MAP_TARGET) :: static $(MAKE_APERL_FILE)
 	$(MAKE) $(USEMAKEFILE) $(MAKE_APERL_FILE) $@
@@ -788,12 +794,12 @@ testdb_static :: testdb_dynamic
 # --- MakeMaker ppd section:
 # Creates a PPD (Perl Package Description) for a binary distribution.
 ppd :
-	$(NOECHO) $(ECHO) '<SOFTPKG NAME="$(DISTNAME)" VERSION="0.02">' > $(DISTNAME).ppd
+	$(NOECHO) $(ECHO) '<SOFTPKG NAME="$(DISTNAME)" VERSION="0.05">' > $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '    <ABSTRACT>The great new way to mange Nexsan'\''s programattically!</ABSTRACT>' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '    <AUTHOR>John Constable &lt;john.constable@sanger.ac.uk&gt;</AUTHOR>' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '    <IMPLEMENTATION>' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '        <REQUIRE NAME="Test::More" />' >> $(DISTNAME).ppd
-	$(NOECHO) $(ECHO) '        <ARCHITECTURE NAME="i686-linux-thread-multi-5.8" />' >> $(DISTNAME).ppd
+	$(NOECHO) $(ECHO) '        <ARCHITECTURE NAME="darwin-2level-5.12" />' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '        <CODEBASE HREF="" />' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '    </IMPLEMENTATION>' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '</SOFTPKG>' >> $(DISTNAME).ppd
@@ -803,6 +809,7 @@ ppd :
 
 pm_to_blib : $(FIRST_MAKEFILE) $(TO_INST_PM)
 	$(NOECHO) $(ABSPERLRUN) -MExtUtils::Install -e 'pm_to_blib({@ARGV}, '\''$(INST_LIB)/auto'\'', q[$(PM_FILTER)], '\''$(PERM_DIR)'\'')' -- \
+	  README.pod $(INST_LIB)/Storage/Nexsan/README.pod \
 	  lib/Storage/Nexsan/NMP.pm blib/lib/Storage/Nexsan/NMP.pm 
 	$(NOECHO) $(TOUCH) pm_to_blib
 

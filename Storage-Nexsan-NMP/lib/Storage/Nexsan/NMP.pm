@@ -9,7 +9,6 @@ use IO::File;
 use File::Slurp;
 use DateTime;
 use Config::INI::Reader;
-#use utf8::all; #for handling weird names etc in the ini fields; no idea if Nexsan support utf8!
 
 use vars qw (@ISA @EXPORT);
 use Exporter;
@@ -26,11 +25,11 @@ Storage::Nexsan::NMP - The great new way to mange Nexsan's programattically!
 
 =head1 VERSION
 
-Version 0.03
+Version 0.05
 
 =cut
 
-our $VERSION = '0.04';
+our $VERSION = '0.05';
 
 
 =head1 SYNOPSIS
@@ -58,7 +57,7 @@ Further work will be done to implement the rest of the NMP as I require it,
 
 Sample code snippet.
 
-    use Storage::Nexsan::NMP;
+use Storage::Nexsan::NMP;
 
 say "Connecting to Nexsan: $nexsan, Port: $port";           
 my %NexsanInfo = ConnectToNexsan ($nexsan, $port);
@@ -98,8 +97,7 @@ close($sock);
 
 =head1 TODO
 
- * Rewrite the functions as OO - at the moment each function copies and pastes some standard functionality
-    which is nasty and should be fixed, but out of TUITS..
+ * Rewrite the functions as OO - at the moment each function copies and pastes some standard functionality which is nasty and should be fixed, but out of TUITS..
  * apply some error checking for correct INI structure in SetOpt()
  * write a specific subroutine for the Powerlevel stanza (see notes in TurnOffMAIDInNexsan() )
  * write tests that tries functions not passing a $nexsan veriable
@@ -179,11 +177,17 @@ sub WriteLog {
 	# in the interestes of getting the script finished in time..
 	say "$NexsanInfo->{ip} :: $testtime :: $message";
 
-} #end of sub log
+} #end of sub WriteLog
 
 
 #TODO test that tries this not passing a $nexsan
 #TODO test that tries this not passing a $port
+
+=head2 ConnectToNexsan
+
+Initial setup internal function used by all the utility functions to setup the telnet conenction
+
+=cut
 
 sub ConnectToNexsan {
 	#MUST be passed IP/fqdn of Nexsan & MAY be passed port no
@@ -875,7 +879,6 @@ The sub expects $NexsanInfo->{datfile} populated with the name of the dat file t
 Note: no error checking is done on the hash to see it contains a correct INI structure
  as it assumes that its been imported from an Nexsan created/modified DAT file.
  Given the SETOPT command if not passed the write information, this is relatively low risk
- 
  
  TODO apply some error checking for correct INI structure, as above!
  TODO write a specific subroutine for the Powerlevel stanza 
